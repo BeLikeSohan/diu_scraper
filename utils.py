@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 
 allowed_url = "daffodilvarsity.edu.bd"
-allowed_subdomains = ["daffodilvarsity", "faculty", "www", "admission"]
+allowed_subdomains = ["daffodilvarsity", "faculty"]
 unallowed_types = ["pdf", "jpg", "jpeg", "png", "webp"]
 
 
