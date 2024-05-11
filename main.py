@@ -16,7 +16,12 @@ def crawl():
         url = link_queue.pop(0)
         print("Scrapping: {}".format(url))
 
-        response = requests.get(url)
+        try:
+            response = requests.get(url)
+        except:
+            print("Network Error, Skipping")
+            continue
+
         soup = BeautifulSoup(response.content, features="html.parser")
 
         temp = []
@@ -31,7 +36,7 @@ def crawl():
             print("Added {} URLs in the queue, total: {}".format(len(temp), len(link_queue)))
 
         markdown = md(response.content, strip=['a', 'img', 'nav'])
-        with open(os.path.join('data/md', sanitize_url(url)+".md"), "w", encoding="utf-8") as md_file:
+        with open(os.path.join('data/md', sanitize_url(url) + ".md"), "w", encoding="utf-8") as md_file:
             markdown = re.sub(r'\n\s*\n', '\n\n', markdown)
             md_file.write(markdown)
 
